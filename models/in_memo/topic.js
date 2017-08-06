@@ -24,7 +24,7 @@ async function getTopics(params){
 };
 
 async function getTopicById(topicId){
-  return topics.find(u=>u._id === topicId);
+  return topics.find(u=>u._id === Number(topicId));
 }
 
 async function updateTopicById(topicId, update){
