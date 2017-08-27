@@ -4,6 +4,7 @@ const User = require('../models/mongo/user')
 const JWT = require('jsonwebtoken')
 const JWT_SECRET = require('../cipher').JWT_SECRET
 const Errors = require('../errors')
+const WechatService = require('../services/wechat_service')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -26,6 +27,29 @@ router.post('/login', (req, res, next) => {
       code: 0,
       data: {
         user: user,
+        token: token,
+      }
+    }
+  })()
+    .then(r => {
+      res.json(r)
+    })
+    .catch(e => {
+      next(e)
+    })
+})
+
+router.post('/wechat/login', (req, res, next)=>{
+  (async () => {
+    const {code} = req.body
+    const user = await WechatService.getUserInfoByCode(code)
+    const foundOrCreated = await User.loginWithWechat(user)
+    const token = JWT.sign({_id: user._id, iat: Date.now(), expire: Date.now() + 24 * 60 * 60 * 1000}, JWT_SECRET)
+
+    return {
+      code: 0,
+      data: {
+        user: foundOrCreated,
         token: token,
       }
     }
