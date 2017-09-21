@@ -50,6 +50,20 @@ class RedisError extends BaseHTTPError {
   }
 }
 
+class NeverLikedError extends BaseHTTPError {
+  constructor (userId, attachedId) {
+    const msg = `user ${userId} never liked content ${attachedId}, but called dislike`
+    super(`never liked error: ${msg}`, 6000001, 400, '还没有点过赞呢，不能取消呦')
+  }
+}
+
+class AlreadyLikedError extends BaseHTTPError {
+  constructor (userId, attachedId) {
+    const msg = `user ${userId} already liked content ${attachedId}, but called like`
+    super(`already liked error: ${msg}`, 6000002, 400, '已经点过赞啦')
+  }
+}
+
 module.exports = {
   BaseHTTPError,
   ValidationError,
@@ -57,4 +71,6 @@ module.exports = {
   InternalError,
   WechatAPIError,
   RedisError,
+  NeverLikedError,
+  AlreadyLikedError,
 }
