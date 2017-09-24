@@ -7,6 +7,8 @@ const bodyParser = require('body-parser');
 const index = require('./routes/index');
 const users = require('./routes/user');
 const topicRouter = require('./routes/topic');
+const msgRouter = require('./routes/msg');
+
 require('./services/mongoose_service');
 const Errors = require('./errors');
 const logger = require('./utils/logger').logger;
@@ -30,6 +32,7 @@ app.use(require('./middlewares/req_log').logRequests())
 app.use('/', index);
 app.use('/user', users);
 app.use('/topic', topicRouter);
+app.use('/msg', msgRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

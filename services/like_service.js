@@ -13,8 +13,8 @@ async function likeTopic (userId, attachedId) {
 }
 
 async function likeReply (userId, attachedId) {
-  await Like.like(ObjectId(userId), ObjectId(attachedId), Like.LIKE_TYPES.REPLY)
   await User.incrPoints(ObjectId(userId), 10)
+  await Like.like(ObjectId(userId), ObjectId(attachedId), Like.LIKE_TYPES.REPLY)
   await Topic.likeAReply(attachedId)
   await PointsOp.createPointsOp(ObjectId(userId), PointsOp.POINTS_OP_TYPES.LIKE, 10)
   return true
