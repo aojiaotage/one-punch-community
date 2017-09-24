@@ -19,7 +19,7 @@ async function _incrUserUnreadCount (userId, incr) {
     .catch(e => {
       const errorMsg = 'error incr user unread count'
       logger.error(errorMsg, {err: e.stack || e})
-      throw Errors.InternalError(errorMsg)
+      throw new Errors.InternalError(errorMsg)
     })
   return result
 }
@@ -29,7 +29,7 @@ async function _clearUserUnreadCount (userId) {
     .catch(e => {
       const errorMsg = 'error incr user unread count'
       logger.error(errorMsg, {err: e.stack || e})
-      throw Errors.InternalError(errorMsg)
+      throw new Errors.InternalError(errorMsg)
     })
   return result
 }
@@ -42,7 +42,7 @@ async function getUserUnreadCount (userId) {
     .catch(e => {
       const errorMsg = 'error incr user unread count'
       logger.error(errorMsg, {err: e.stack || e})
-      throw Errors.InternalError(errorMsg)
+      throw new Errors.InternalError(errorMsg)
     })
   return result
 }

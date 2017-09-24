@@ -6,7 +6,7 @@ const {ObjectId} = Schema.Types
 
 const POINTS_OP_TYPES = {
   LIKE: 'like',
-  DISLIKE: 'like',
+  DISLIKE: 'dislike',
   REPLY: 'reply',
 }
 

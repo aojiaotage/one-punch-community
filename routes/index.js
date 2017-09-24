@@ -5,6 +5,7 @@ const JWT = require('jsonwebtoken')
 const JWT_SECRET = require('../cipher').JWT_SECRET
 const Errors = require('../errors')
 const WechatService = require('../services/wechat_service')
+const PointService = require('../services/point_service')
 const response = require('../utils/response')
 
 /* GET home page. */
@@ -59,6 +60,23 @@ router.post('/wechat/login', (req, res, next)=>{
     .then(r => {
       res.data = r
       response(req, res, next)
+    })
+    .catch(e => {
+      next(e)
+    })
+})
+
+router.get('/pointsRank', (req,res,next)=>{
+  (async () => {
+    const users = await PointService.getPointsRankBrief()
+    return {
+      code:0,
+      users,
+    }
+  })()
+    .then(r => {
+      res.data = r
+      response(req, res)
     })
     .catch(e => {
       next(e)

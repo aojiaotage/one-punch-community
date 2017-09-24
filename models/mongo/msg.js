@@ -33,7 +33,7 @@ async function createAMsg (from, to, content, type, extra) {
     .catch(e => {
       const errorMsg = 'error creating a new msg'
       logger.error(errorMsg, {err: e.stack || e})
-      throw Errors.InternalError(errorMsg)
+      throw new Errors.InternalError(errorMsg)
     })
   return msg
 }
@@ -45,6 +45,11 @@ async function listUserReceivedMsgs (query) {
   flow.limit(pageSize)
   flow.skip(pageSize * page)
   const msgs = await flow.then()
+    .catch(e => {
+      const errorMsg = 'error getting received msgs from db'
+      logger.error(errorMsg, {err: e.stack || e})
+      throw new Errors.InternalError(errorMsg)
+    })
   return msgs
 }
 
