@@ -6,6 +6,7 @@ const multer = require('multer')
 const path = require('path')
 const upload = multer({dest: path.join(__dirname, '../public/upload')})
 const HOST = process.env.NODE_ENV === 'production' ? 'http://some.host/': 'http://localhost:8082'
+const response = require('../utils/response')
 
 router.route('/')
   .get((req, res, next) => {
@@ -17,7 +18,8 @@ router.route('/')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -37,7 +39,8 @@ router.route('/')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -55,7 +58,8 @@ router.route('/:id')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -76,7 +80,8 @@ router.route('/:id')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)

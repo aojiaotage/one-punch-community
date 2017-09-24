@@ -4,6 +4,7 @@ const User = require('../models/mongo/user')
 const Topic = require('../models/mongo/topic')
 const auth = require('../middlewares/auth_user')
 const LikeService = require('../services/like_service')
+const response = require('../utils/response')
 
 // localhost:8082/topic/
 router.route('/')
@@ -16,7 +17,8 @@ router.route('/')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -36,7 +38,8 @@ router.route('/')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -53,7 +56,8 @@ router.route('/:id')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -70,7 +74,8 @@ router.route('/:id')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -86,7 +91,8 @@ router.route('/:id/like')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -100,7 +106,8 @@ router.route('/:id/like')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -122,7 +129,8 @@ router.route('/:id/reply')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -138,7 +146,8 @@ router.route('/:id/reply/:replyId/like')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)
@@ -152,7 +161,8 @@ router.route('/:id/reply/:replyId/like')
       }
     })()
       .then(r => {
-        res.json(r)
+        res.data = r
+        response(req, res, next)
       })
       .catch(e => {
         next(e)

@@ -5,6 +5,7 @@ const JWT = require('jsonwebtoken')
 const JWT_SECRET = require('../cipher').JWT_SECRET
 const Errors = require('../errors')
 const WechatService = require('../services/wechat_service')
+const response = require('../utils/response')
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -32,7 +33,8 @@ router.post('/login', (req, res, next) => {
     }
   })()
     .then(r => {
-      res.json(r)
+      res.data = r
+      response(req, res, next)
     })
     .catch(e => {
       next(e)
@@ -55,7 +57,8 @@ router.post('/wechat/login', (req, res, next)=>{
     }
   })()
     .then(r => {
-      res.json(r)
+      res.data = r
+      response(req, res, next)
     })
     .catch(e => {
       next(e)
